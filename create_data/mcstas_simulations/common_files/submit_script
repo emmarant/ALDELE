@@ -1,0 +1,31 @@
+#!/bin/bash -l
+#SBATCH -J short
+#SBATCH -N 3
+#SBATCH --time=01:00:00
+#SBATCH --partition=short
+#SBATCH --ntasks-per-node=48
+#SBATCH -o out.o
+#SBATCH -e out.e
+
+NUMCORES=`echo "$SLURM_NNODES 48 * p "| dc`
+
+echo "Starting at `date`"
+echo "Running on hosts: $SLURM_NODELIST"
+echo "Running on $SLURM_NNODES nodes."
+echo "Running on $SLURM_NPROCS processors."
+echo "Current working directory is `pwd`"
+
+module unload intel
+module load intel/intel-17.1_intel64 
+module load mcstas/mcstas2.3
+module list
+
+dirname=test
+
+mcrun --mpi=$NUMCORES -n1e10 DMC_AO_atBOA.instr -p params.dat -d $dirname
+
+cp out.o $dirname
+cp out.e $dirname
+rm out.o
+rm out.e
+echo "Program finished with exit code $? at: `date`"

@@ -1,0 +1,203 @@
+//29/07/2021
+// Emmanouela Rantsiou: DMC instrument file as of 2021
+// New DMC specifics provided by U. Filges
+// Contains AO lens optimised for DMC by M. Yamada and/or U. Filges
+
+DEFINE INSTRUMENT PSI_DMC(lambda=2.4, R=0.91, R_curve=0.96, gal=0.0, rc=0.0, gau=0.0)
+
+DECLARE
+%{
+  double mono_q = 1.8734;
+  double OMA;  
+  double RV;
+  double y_mono = 0.025;
+  double NV = 5;
+  double d_phi_0;
+  double TTM;
+  
+  
+  /******Mirrorvalues*****/
+  
+  double alpha;
+  double Qc=0.0217;
+  double R0=0.995;
+  double Mvalue=2.5;
+  double W=1.0/250.0;
+  
+  double alpha_curve;
+  double Qc_curve=0.0217;
+  double R0_curve= 0.995;
+  double Mvalue_curve=1.5;
+  double W_curve=1.0/250.0;
+  
+
+%}
+
+INITIALIZE
+%{
+
+  TTM = 2*asin(mono_q*lambda/(4*PI))*RAD2DEG;
+  OMA = TTM/2;
+  RV = fabs(2*2.2*sin(DEG2RAD*OMA));
+  
+ 
+  alpha=(R0-R)/Qc/(Mvalue-1);
+  alpha_curve=(R0_curve-R_curve)/Qc_curve/(Mvalue_curve-1);
+  
+%}
+
+TRACE
+
+COMPONENT source_arm = Progress_bar()
+AT (0, 0, 0) ABSOLUTE
+
+COMPONENT source = Source_Maxwell_3(
+        yheight=0.156, xwidth=0.126,
+	 Lmin=1.0,Lmax=10.0,
+        dist=1.5, focus_xw = 0.02, focus_yh = 0.14,
+        T1=296.16, I1=8.5E11,
+        T2=40.68, I2=5.2E11)    
+AT (0,0,0) RELATIVE source_arm  ROTATED (0,0,0) RELATIVE source_arm
+
+//COMPONENT PSDbefore_guides = PSD_monitor(
+//    nx = 128, ny = 128, filename = "PSDbefore_guides.dat",
+//    xwidth = 0.02, yheight = 0.14)
+//AT (0, 0, 1.49999) RELATIVE source_arm
+
+//COMPONENT l_mon_source = L_monitor(
+//    nL = 101, filename = "lmonsource.dat", xwidth = 0.02,
+//    yheight = 0.14, Lmin = 0, Lmax = 20)
+//AT (0, 0, 1e-9) RELATIVE PREVIOUS
+
+
+/* guide segment 1, m=2, 4.66 m */
+COMPONENT guide1 = Guide(w1= 0.02, h1=0.14, w2=0.02, h2=0.14,
+                         l=4.66, R0=R0, Qc=Qc, alpha = alpha,
+                         m = 2.5, W = W)
+AT (0,0,1.50) RELATIVE source_arm ROTATED (0,0,0) RELATIVE source_arm
+
+//COMPONENT PSDbefore_curve = PSD_monitor(
+//    nx = 128, ny = 128, filename = "PSDbefore_curve.dat",
+//    xwidth = 0.02, yheight = 0.14)
+//AT (0, 0, 4.664) RELATIVE guide1
+
+COMPONENT guide2 = Bender(
+    w = 0.02, h = 0.14, r = 3612, R0a = R0_curve, Qca = Qc_curve,
+    alphaa = alpha, ma = Mvalue, Wa = W, R0i = R0_curve, Qci = Qc_curve,
+    alphai = alpha_curve, mi = 1.5, Wi = W_curve, R0s = R0_curve, Qcs = Qc_curve,
+    alphas = alpha, ms = Mvalue, Ws = W, l = 22.0)
+AT (0, 0, 4.69) RELATIVE guide1
+
+/* m=2.5, 1.0 m */
+COMPONENT bunker = Guide(
+        w1=0.02, h1=.14, w2=0.02, h2=.14,
+        l=1.0, R0=R0,Qc=Qc, alpha = alpha,
+        m = 2.5, W = W)
+AT (0,0,22.01) RELATIVE guide2 ROTATED (0,0,0) RELATIVE guide2
+
+/* shutter */
+
+//COMPONENT PSDafter_curve = PSD_monitor(
+//    nx = 128, ny = 128, filename = "PSDshutter.dat",
+//    xwidth = 0.02, yheight = 0.14)
+//  AT (0, 0, 23.05) RELATIVE guide2
+
+/* guide segment 3, m=2.5, 18.58 m */
+
+COMPONENT guide3 = Guide(
+        w1=0.02, h1=.14, w2=0.02, h2=.14,
+        l=18.58, R0=R0,Qc=Qc, alpha = alpha,
+        m = 2.5, W = W)
+AT (0,0,1.11) RELATIVE bunker ROTATED (0,0,0) RELATIVE bunker
+
+/* guide exit at 42.5 m - measured flux 2.46 10e8 cm-2 s-1 mA-1 */
+
+
+//COMPONENT PSD_DMC_Mono =  PSD_monitor(
+//    xwidth = 0.02, yheight = 0.14,
+//    nx=128, ny=128, filename="PSD_mono.dat")
+//  AT ( 0, 0, 18.5801) RELATIVE guide3
+
+COMPONENT in_slit = Slit(
+        xmin = -0.01, xmax=0.01 , ymin = -0.07, ymax = 0.07)
+  AT (0,0,0.001) RELATIVE  PREVIOUS
+
+
+/* Monochromator description */ 
+
+COMPONENT sma = Arm() /* source - monochromator arm */ 
+AT (0, 0, 0.2) RELATIVE in_slit ROTATED (0,OMA,0) RELATIVE in_slit
+
+SPLIT 100 COMPONENT foc_mono = Monochromator_2foc(
+    zwidth = 0.05, yheight = 0.025, gap = 0.0005, NH = 1, NV = 5,
+    mosaich = 38, mosaicv = 38, r0 = 0.7, Q = mono_q, RV = RV,
+    RH = 0)
+AT (0, 0, 0) RELATIVE sma
+
+COMPONENT msa = Arm() /* monochromator - sample arm */
+   AT (0, 0, 0) RELATIVE sma ROTATED (0, TTM, 0) RELATIVE in_slit
+
+/* shutter */
+COMPONENT out1_slit = Slit(
+        xmin=-0.028, xmax=0.028, ymin=-0.073, ymax=0.073)
+  AT (0,0,0.22) RELATIVE msa ROTATED (0,0,0) RELATIVE msa  
+
+/* shielding */ 
+COMPONENT Amoin_slit = Slit(
+        xmin=-0.031, xmax=0.031, ymin=-0.076, ymax=0.076)
+  AT (0,0,0.23) RELATIVE  msa ROTATED (0,0,0) RELATIVE msa
+
+COMPONENT Bmoin_slit = Slit(
+        xmin=-0.03, xmax=0.03, ymin=-0.075, ymax=0.075) 
+  AT (0,0,0.53) RELATIVE  msa ROTATED (0,0,0) RELATIVE msa
+
+/* Steckblende */
+
+COMPONENT out2_slit = Slit(
+        xmin=-0.01, xmax=0.01, ymin=-0.06, ymax=0.06)
+  AT (0,0,0.85) RELATIVE msa ROTATED (0,0,0) RELATIVE msa  
+
+//COMPONENT PSD_sample_optics2 =  PSD_monitor(
+//    xmin=-0.003, xmax=0.003, ymin=-0.0325, ymax=0.0325,
+//    nx=80, ny=80, filename="PSD_optics_hin.dat")
+//  AT ( 0, 0, 1.16) RELATIVE msa
+
+
+
+COMPONENT adap_optics = Elliptic_guide_gravity(
+l=0.8, linyh=500.0, linxw=3.4, loutyh=0.156, loutxw=0.310,
+xwidth = 0.016, yheight = 0.06, dimensionsAt="entrance",
+R0=0.99, Qc=0.0219, alphatop=4.0, alphabottom=4.0,alpharight=2.0,alphaleft=2.0,mright=1.5, 
+mleft=1.5, mtop=6.0, mbottom=6.0, W=0.003)
+  AT (0, 0, 1.1602) RELATIVE msa
+  ROTATED (gal, rc, gau) RELATIVE PREVIOUS
+
+
+COMPONENT PSD_before_sample =  PSD_monitor(
+    xwidth=0.1042, yheight=0.1042,
+    nx=1024, ny=1024, filename="PSD_after_ellipse1.dat")
+  AT ( 0, 0, 2.116) RELATIVE msa
+
+COMPONENT PSD_sample =  PSD_monitor(
+    xmin=-0.0521, xmax=0.0521, ymin=-0.0521, ymax=0.0521,
+    nx=1024, ny=1024, filename="PSD_after_ellipse2.dat")
+  AT ( 0, 0, 2.2) RELATIVE msa
+
+COMPONENT PSD_after_sample =  PSD_monitor(
+    xmin=-0.0521, xmax=0.0521, ymin=-0.0521, ymax=0.0521,
+    nx=1024, ny=1024, filename="PSD_after_ellipse3.dat")
+  AT ( 0, 0, 2.27) RELATIVE msa
+
+
+COMPONENT PSD_after_sample_2 =  PSD_monitor(
+    xmin=-0.0521, xmax=0.0521, ymin=-0.0521, ymax=0.0521,
+    nx=1024, ny=1024, filename="PSD_after_ellipse4.dat")
+  AT ( 0, 0, 2.4) RELATIVE msa
+
+
+
+END  
+
+
+
+
