@@ -1,4 +1,4 @@
-# Introduction
+# About
 A collection of python notebooks and python scripts for
   + training DL models for automatic neutron lens alignment
   + generating simulated data for said training
