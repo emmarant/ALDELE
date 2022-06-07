@@ -19,7 +19,6 @@ ALDELE
 │   │   │   ├── runs_submit.py
 │   │   │   ├── Source_gen4.comp
 │   │   │   ├── submit_script
-│   │   │   └── submit_script~
 │   │   ├── DMC
 │   │   │   └── DMC_AO_atDMC.instr
 │   │   ├── generic
@@ -34,11 +33,11 @@ ALDELE
 │       └── CNN_regression_single_angle.ipynb
 └── README.md
 
-9 directories, 17 files
+9 directories, 16 files
 
 ```
 
 ## How to use
 
 1) create data (or download existing ones). See instructions in directory _create_data_ .
-2) train a model. See relevant instructions in directory _DL model training_
+2) train a model. See relevant instructions in directory _model training_
