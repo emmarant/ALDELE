@@ -40,4 +40,4 @@ ALDELE
 ## How to use
 
 1) create data (or download existing ones). See instructions in directory _create_data_ .
-2) train a model. See relevant instructions in directory _model training_
+2) train a model. See relevant instructions in directory _model_training_
