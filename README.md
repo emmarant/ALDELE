@@ -23,10 +23,18 @@ ALDELE
 │   │   ├── DMC
 │   │   │   └── DMC_AO_atDMC.instr
 │   │   ├── generic
+│   │   │   ├── BOA_generic.instr
+│   │   │   └── runs_prepare.py
 │   │   └── README.md
 │   └── README.md
-├── README.md
-└── LICENSE.txt
+├── LICENSE.txt
+├── model_training
+│   └── notebooks
+│       ├── CNN_regression_double_angle.ipynb
+│       └── CNN_regression_single_angle.ipynb
+└── README.md
+
+9 directories, 17 files
 
 ```
 
