@@ -421,7 +421,7 @@ l=lens_length, majorAxisxw=a_maj, minorAxisxw=b_min, majorAxisyh=a_maj, minorAxi
 
 
 
-/* scan PSD and DIV monitors for a range 210-260mm after the lens  */
+/* scan PSD  monitors for a range 210-260mm after the lens  */
 
 
 COMPONENT PSD_after_ellipse1_1 = PSD_monitor( 
