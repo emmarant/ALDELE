@@ -1,7 +1,7 @@
 ## Creating simulated data for DL model training
 
-1. First we need to run McStas simulations. 
-2. Then we create *.jpg images from the output of the simulations.
++ Step 1 : set up and run McStas simulations **[follow instructions in directory __]**
++ Step 2 : create *.jpg images from the output of the simulations from Step 1. **[follow instructions in directory __]**
 
 
 
