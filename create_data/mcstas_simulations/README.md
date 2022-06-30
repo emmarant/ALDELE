@@ -7,6 +7,7 @@ The elliptic lens is parametrised as follows:
 
 `
 COMPONENT elliptic_lens1 = Elliptic_guide_gravity(
+                            
                             l = lens_length, linyh = 500.0, linxw = 3.4, loutyh = 0.156, loutxw = 0.310,
                             
                             xwidth = 0.016, yheight = 0.06, dimensionsAt = "entrance",
