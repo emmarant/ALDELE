@@ -5,9 +5,9 @@
 - The McStas instrument files contained in the _DMC_ and _BOA_ folders, contain other than the description of the corresponding beamline, an elliptic neutron lens component and four (4) Position Sensitive Detectors (PSD) at prefixed positions.
 The elliptic lens is parametrised as follows:
 
-`COMPONENT elliptic_lens1 = Elliptic_guide_gravity(
+`COMPONENT elliptic_lens1 = Elliptic_guide_gravity(`
                             
-                            l = lens_length, linyh = 500.0, linxw = 3.4, loutyh = 0.156, loutxw = 0.310,
+                            `l = lens_length, linyh = 500.0, linxw = 3.4, loutyh = 0.156, loutxw = 0.310,
                             
                             xwidth = 0.016, yheight = 0.06, dimensionsAt = "entrance",
                             
