@@ -13,7 +13,7 @@ COMPONENT elliptic_lens1 = Elliptic_guide_gravity(
                            mright = 1.5, mleft = 1.5, mtop = 6.0, mbottom = 6.0, W = 0.003)
 ```
 
-- The McStas instrument file located in the -generic- folder contains the description of the full BOA beamline, an elliptic neutron lens component, and various Position Sensitive Detectors (PSD) at prefixed positions. The parameters of the elliptic lens are not prefixed, but rather assigned randomly by the _runs_prepare.py_ script, located also in the same folder. During run time, a *parameter* file including the relevant values for the elliptic_guide component is read.   
+- The McStas instrument file located in the _generic_ folder contains the description of the full BOA beamline, an elliptic neutron lens component, and various Position Sensitive Detectors (PSD) at prefixed positions. The parameters of the elliptic lens are not prefixed, but rather assigned randomly by the _runs_prepare.py_ script, located also in the same folder. During run time, a *parameter* file including the relevant values for the elliptic_guide component is read.   
 
 
 - The McStas instrument files can of course be editted if needed to adjust type and characteristics of neutron lens, number and position of PSD components, etc.
