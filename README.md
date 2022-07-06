@@ -44,5 +44,5 @@ ALDELE
 
 ## How to use
 
-+ Step 1 : Create data (or download existing ones). **[follow instructions in directory _create_data_]**
-+ Step 2 : Train a model. **[follow instructions in directory _model_training_]**
++ Step 1 : Create data (or download existing ones). *[follow instructions in directory* __create_data__ *]*
++ Step 2 : Train a model. *[follow instructions in directory* __model_training__ *]*
