@@ -9,18 +9,21 @@ The full contents and directory organisation of this repo:
 ALDELE
 ├── create_data
 │   ├── create_images
+│   │   ├── README.md
 │   │   └── savejpg.py
 │   ├── mcstas_simulations
 │   │   ├── BOA
-│   │   │   └── DMC_AO_atBOA.instr
+│   │   │   ├── DMC_AO_atBOA.instr
+│   │   │   ├── runs_prepare.py
+│   │   │   └── runs_submit.py
 │   │   ├── common_files
 │   │   │   ├── Guide_four_side.comp
-│   │   │   ├── runs_prepare.py
-│   │   │   ├── runs_submit.py
 │   │   │   ├── Source_gen4.comp
-│   │   │   ├── submit_script
+│   │   │   └── submit_script
 │   │   ├── DMC
-│   │   │   └── DMC_AO_atDMC.instr
+│   │   │   ├── DMC_AO_atDMC.instr
+│   │   │   ├── runs_prepare.py
+│   │   │   └── runs_submit.py
 │   │   ├── generic
 │   │   │   ├── BOA_generic.instr
 │   │   │   └── runs_prepare.py
@@ -28,12 +31,14 @@ ALDELE
 │   └── README.md
 ├── LICENSE.txt
 ├── model_training
-│   └── notebooks
-│       ├── CNN_regression_double_angle.ipynb
-│       └── CNN_regression_single_angle.ipynb
+│   ├── notebooks
+│   │   ├── CNN_regression_double_angle.ipynb
+│   │   └── CNN_regression_single_angle.ipynb
+│   └── README.md
 └── README.md
 
-9 directories, 16 files
+
+9 directories, 20 files
 
 ```
 
