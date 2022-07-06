@@ -1,4 +1,4 @@
-## Creating simulated data for DL model training
+## Create simulated data for DL model training
 
 + Step 1 : set up and run McStas simulations *[follow instructions in directory* __mcstas_simulations__ *]*
 + Step 2 : create *.jpg images from the output of the simulations from Step 1. *[follow instructions in directory* __create_images__ *]*
