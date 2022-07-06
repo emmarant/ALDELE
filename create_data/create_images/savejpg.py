@@ -2,7 +2,7 @@
 # __Last edited__: May 2022
 # __Description__: descents into the run directories of mcstas simulations and creates grayscale jpg images from all the dat files there.
 # It then saves them into: data/name_of_run_dir
-# Assumes this python file is in save dir level as: a) the folder that holds the mcstas simulations (DIR_DIR here) and the root directory where the resulting
+# Assumes this python file is in same dir level as: a) the folder that holds the mcstas simulations (DIR_DIR here) and the root directory where the resulting
 # images are saved ('data' dir in this case). 
 # Works (at minimum) with python2.7
 
@@ -12,16 +12,16 @@ import matplotlib.pyplot as plt
 import os
 import glob
 
+# ##########################
+# Input required by user:
+DIR_DIR='DMC_AO_atBOA_5'            # path of the folder with mcstas runs. 
+dirs_root_name = 'ellipse_rot_'     # the root name of all run dirs into DIR_DIR. 
+num_PSD = 4                         # number of *.dat files (PSD monitors) in each one of the 'dirs'
+image_dir='data/DMC_AO_atBOA_5'     # where to save the jpg images.
+skiplines=39                        # number of header lines in the mcstas PSD dat files. Typically 39. 
+# #########################
 
-#### input required by user:
-DIR_DIR='DMC_AO_atBOA_5'  # path of the folder with mcstas runs. 
-dirs_root_name = 'ellipse_rot_' # the root name of all run dirs into DIR_DIR. 
-num_PSD = 4 # number of *.dat files (PSD monitors) in each one of the 'dirs'
-image_dir='data/DMC_AO_atBOA_5' # where to save the jpg images.
-skiplines=39 # number of header lines in the mcstas PSD dat files. Typically 39. 
-####
-
-# create image_dir if it does not exist
+# Create image_dir if it does not exist
 if not os.path.exists(image_dir):
     os.makedirs(image)dir)
 
