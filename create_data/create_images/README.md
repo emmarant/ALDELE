@@ -5,4 +5,5 @@ Once the McStas simulations (instructions [here](https://github.com/emmarant/ALD
 To do so, 
 1. edit the file __'savejpg.py'__ accordingly  (part indicated as *'Input required by user'*), and then
 2. run the file:
+ 
                       $ python savejpg.py
