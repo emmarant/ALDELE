@@ -34,12 +34,12 @@ ALDELE
 │   ├── notebooks
 │   │   ├── CNN_regression_double_angle.ipynb
 │   │   └── CNN_regression_single_angle.ipynb
-│   └── README.md
+│   ├── README.md
+│   ├── running_environment
+│   └── running_environment~
 └── README.md
 
-
-9 directories, 20 files
-
+9 directories, 22 files
 ```
 
 ## How to use
