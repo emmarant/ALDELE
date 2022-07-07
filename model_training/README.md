@@ -6,4 +6,4 @@ Step 1. Choose which notebook matches the model type you want to train: i) singl
 
 Step 2.
 
-Step 3. Run the notebook. The file 'running _environment' provides info on software and library versions required to run. Similar environments (i.e. similar library and software versions) should also work.
+Step 3. Run the notebook. The file 'running _environment' provides info on software and library versions required to run. Similar environments should also work.
