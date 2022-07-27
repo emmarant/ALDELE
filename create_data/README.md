@@ -18,4 +18,3 @@ The list below, provides links to downloading these datasets.
 - [McStas simulated data of elliptic neutron lens in DMC (y-axis rotation)](https://doi.org/10.5281/zenodo.6807246)
 
 
-([a test dataset in the internet archive](https://archive.org/details/aldele_test_images/))
