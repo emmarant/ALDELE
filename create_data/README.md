@@ -18,3 +18,8 @@ The list below, provides links to downloading these datasets.
 - [McStas simulated data of elliptic neutron lens in DMC (y-axis rotation)](https://doi.org/10.5281/zenodo.6807246)
 
 
+## Check out pre-trained models and their performance
+
+- [Models trained with  simulated DMC AO at DMC](https://app.neptune.ai/emmarant/NO-CNN-regr-DMC-AO-atDMC-sim/experiments?split=tbl&dash=charts&viewId=966ea367-b6f5-4a39-a900-6e051acb668b) 
+
+- [Models trained with  simulated DMC AO at BOA](https://app.neptune.ai/emmarant/NO-CNN-regr-DMC-AO-atBOA-sim/experiments?split=tbl&dash=charts&viewId=96701efd-229a-4e1a-b83b-65d6229b9de3)
